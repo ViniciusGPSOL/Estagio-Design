@@ -1,0 +1,10 @@
+Informações gerais do grafico
+
+titulo
+tipo de gráfico
+
+Valores
+
+variavel1
+variavel2
+
