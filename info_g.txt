@@ -1,7 +1,0 @@
-000:Informações gerais do grafico
-001:titulo
-002:tipo de gráfico
-003:Valores
-004:#1
-005:#4
-006:#9
