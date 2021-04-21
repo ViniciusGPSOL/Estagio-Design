@@ -31,7 +31,6 @@ class grafico_pizza(object):
 		lista_dados_num.append(self.dado_num)
 		coluna = lista_dados_num.index(self.dado_num) + 1
 		porcentagem = str((100*self.dado_num)/total)
-		print(porcentagem[:5])
 		colunas.append(self.dado_info + ' ' + str(coluna) + '(' + porcentagem[:5] + '%' + ')')
 #listas com os dados organizados para o gráfico
 lista_dados_num = []
