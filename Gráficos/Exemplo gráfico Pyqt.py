@@ -43,7 +43,7 @@ class AppGrafico(QWidget):
 #adicionar os dados para as listas de dados do gráfico 
 for element in info:
     if element[4:5] == '#':
-        element_unico = li.dados_grafico(element, info[2])
+        element_unico = li.grafico_barras(element, info[2])
         element_unico.converter_dados_num()
 
 app = QApplication(sys.argv)   
