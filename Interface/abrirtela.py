@@ -21,11 +21,18 @@ class TelaInicial(QtWidgets.QMainWindow):
           self.janela = Janela()
 
      def on_pushButton_clicked(self):
-          filepath = str(QFileDialog.getOpenFileName())
+          self.open_dialog_box()
           #self.janela.show()
 
-     '''def open_dialog_box(self):
-          filepath = str(QFileDialog.getOpenFileName())'''
+     def open_dialog_box(self):
+          filepath = QFileDialog.getOpenFileName()
+          filename = filepath[0]
+          print(filename)
+
+          with open(filename, "r") as f:
+               print(f.readline())
+
+          self.pushButton.clicked.disconnect(self.open_dialog_box)
 
 
 
