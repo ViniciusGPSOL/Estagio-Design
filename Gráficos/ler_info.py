@@ -1,6 +1,9 @@
 #Abrir arquivo.txt e separar cada linha em uma lista. 
 arq = open('info_g.txt', 'r')
 info = (arq.readlines())
+titulo = info[1][4:]
+x = info[2][4:]
+y = info[3][4:]
 
 #classe para colocar dados nos parâmetros necessários
 class dados_grafico(object):
@@ -16,9 +19,3 @@ class dados_grafico(object):
 #listas com os dados organizados para o gráfico
 lista_dados_num = []
 colunas = []
-
-#adicionar os dados para as listas de dados do gráfico 
-for element in info:
-	if element[4:5] == '#':
-		element_unico = dados_grafico(element, info[2])
-		element_unico.converter_dados_num()
