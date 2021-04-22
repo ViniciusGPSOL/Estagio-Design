@@ -27,3 +27,8 @@ class AppGrafico(QWidget):
         super().__init__()
         self.resize(1400, 800)
         chart = Canvas(self)
+
+app = QApplication(sys.argv)   
+janela = AppGrafico()
+janela.show()
+sys.exit(app.exec_())
