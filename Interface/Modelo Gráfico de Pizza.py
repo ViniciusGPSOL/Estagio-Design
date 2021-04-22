@@ -10,9 +10,9 @@ for element in info:
     if element[4:5] == '#':
         element_unico = li.grafico_pizza(element, info[2])
         element_unico.converter_dados_num()
-""" 
-Dados do gráfico
-"""
+
+#Dados do gráfico
+
 y = np.array(li.lista_dados_num)
 
 plt.pie(y, labels = li.colunas)

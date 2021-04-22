@@ -1,8 +1,9 @@
 000:Informações gerais do grafico
-001:TITULO DO GRAFICO
+001:SALARIO POR FUNCIONARIO
 002:Funcionario
 003:Salario
 004:#120
 005:#60
 006:#80
 006:#200
+007:#100
