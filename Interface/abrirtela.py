@@ -11,6 +11,7 @@ import logo_rc
 
 #define a tela com as escalas e informações do gráfico
 
+
 class Grafico_horizontal(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
@@ -41,6 +42,7 @@ class Grafico_barras(FigureCanvas):
         self.ax.set(xlabel=li.x, ylabel=li.y,
              title=li.titulo)
 
+
 class Grafico_pizza(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
@@ -50,14 +52,7 @@ class Grafico_pizza(FigureCanvas):
 #Dados do gráfico
         y = np.array(li.lista_dados_num)
         
-        self.ax.bar(xpoints, ypoints)
-
-        self.ax.set(xlabel=li.x, ylabel=li.y,
-             title=li.titulo)
-
-        self.plt.pie(y, labels = li.colunas)
-        self.plt.legend(title = li.titulo)
-        self.plt.show()
+        self.ax.pie(y, labels = li.colunas)
 
 #Define a resolução
 class AppGrafico(QWidget):
@@ -67,8 +62,7 @@ class AppGrafico(QWidget):
         if var == 1:
             chart = Grafico_barras(self)
         elif var == 2:
-            pass
-            #chart = Grafico_pizza(self)
+            chart = Grafico_pizza(self)
         elif var == 3:
             chart = Grafico_horizontal(self)
 
@@ -102,11 +96,8 @@ class Janela(QtWidgets.QMainWindow):
         global var
         var = 2
 
-        y = np.array(li.lista_dados_num)
-        
-        plt.pie(y, labels = li.colunas)
-        plt.legend(title = li.titulo)
-        plt.show()
+        self.janela = AppGrafico()
+        self.janela.show()
 
     def open_grafico_horizontal(self):
           #adicionar os dados para as listas de dados do gráfico
@@ -114,8 +105,8 @@ class Janela(QtWidgets.QMainWindow):
             if element[4:5] == '#':
                 element_unico = li.grafico_horizontal(element, info[2])
                 element_unico.converter_dados_num()
-            global var
-            var = 3
+        global var
+        var = 3
             
         self.janela = AppGrafico()
         self.janela.show()
