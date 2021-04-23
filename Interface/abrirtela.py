@@ -10,7 +10,7 @@ import ler_info as li
 import logo_rc
 
 #define a tela com as escalas e informações do gráfico
-class Canvas(FigureCanvas):
+class Grafico_barras(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
         super().__init__(fig)
@@ -25,12 +25,33 @@ class Canvas(FigureCanvas):
         self.ax.set(xlabel=li.x, ylabel=li.y,
              title=li.titulo)
 
+class Grafico_pizza(FigureCanvas):
+    def __init__(self, parent):
+        fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
+        super().__init__(fig)
+        self.setParent(parent)
+
+#Dados do gráfico
+        y = np.array(li.lista_dados_num)
+        
+        self.ax.bar(xpoints, ypoints)
+
+        self.ax.set(xlabel=li.x, ylabel=li.y,
+             title=li.titulo)
+
+        self.plt.pie(y, labels = li.colunas)
+        self.plt.legend(title = li.titulo)
+        self.plt.show()
+
 #Define a resolução
 class AppGrafico(QWidget):
     def __init__(self):
         super().__init__()
         self.resize(1400, 800)
-        chart = Canvas(self)
+        #if var == 1:
+        chart = Grafico_barras(self)
+        #else:
+            #chart = Grafico_pizza(self)
 
 class Janela(QtWidgets.QMainWindow):
     def __init__(self):
@@ -38,19 +59,30 @@ class Janela(QtWidgets.QMainWindow):
         uic.loadUi('ui/janela.ui', self)
         self.setFixedSize(777, 712)
         self.pushButton.clicked.connect(self.open_grafico_barras)
+        self.pushButton2.clicked.connect(self.open_grafico_pizza)
           
 
     def open_grafico_barras(self):
-          #adicionar os dados para as listas de dados do gráfico
+#adicionar os dados para as listas de dados do gráfico
         for element in info:
             if element[4:5] == '#':
                 element_unico = li.grafico_barras(element, info[2])
-                element_unico.converter_dados_num()
-            print(element)
-            
+                element_unico.converter_dados_num() 
         self.janela = AppGrafico()
         self.janela.show()
 
+    def open_grafico_pizza(self):
+#adicionar os dados para as listas de dados do gráfico
+        for element in info:
+            if element[4:5] == '#':
+                element_unico = li.grafico_pizza(element, info[2])
+                element_unico.converter_dados_num()
+
+        y = np.array(li.lista_dados_num)
+        
+        plt.pie(y, labels = li.colunas)
+        plt.legend(title = li.titulo)
+        plt.show()
           
 
 class TelaInicial(QtWidgets.QMainWindow):

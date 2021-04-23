@@ -17,4 +17,4 @@ y = np.array(li.lista_dados_num)
 
 plt.pie(y, labels = li.colunas)
 plt.legend(title = li.titulo)
-plt.show() 
+plt.show()
