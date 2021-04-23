@@ -10,6 +10,22 @@ import ler_info as li
 import logo_rc
 
 #define a tela com as escalas e informações do gráfico
+
+class Grafico_horizontal(FigureCanvas):
+    def __init__(self, parent):
+        fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
+        super().__init__(fig)
+        self.setParent(parent)
+
+#Dados do gráfico
+        xpoints = np.array(li.colunas)
+        ypoints = np.array(li.lista_dados_num)
+        
+        self.ax.barh(xpoints, ypoints)
+
+        self.ax.set(xlabel=li.x, ylabel=li.y,
+             title=li.titulo)
+
 class Grafico_barras(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
@@ -48,10 +64,13 @@ class AppGrafico(QWidget):
     def __init__(self):
         super().__init__()
         self.resize(1400, 800)
-        #if var == 1:
-        chart = Grafico_barras(self)
-        #else:
+        if var == 1:
+            chart = Grafico_barras(self)
+        elif var == 2:
+            pass
             #chart = Grafico_pizza(self)
+        elif var == 3:
+            chart = Grafico_horizontal(self)
 
 class Janela(QtWidgets.QMainWindow):
     def __init__(self):
@@ -60,6 +79,7 @@ class Janela(QtWidgets.QMainWindow):
         self.setFixedSize(777, 712)
         self.pushButton.clicked.connect(self.open_grafico_barras)
         self.pushButton2.clicked.connect(self.open_grafico_pizza)
+        self.pushButton3.clicked.connect(self.open_grafico_horizontal)
           
 
     def open_grafico_barras(self):
@@ -67,7 +87,9 @@ class Janela(QtWidgets.QMainWindow):
         for element in info:
             if element[4:5] == '#':
                 element_unico = li.grafico_barras(element, info[2])
-                element_unico.converter_dados_num() 
+                element_unico.converter_dados_num()
+        global var
+        var = 1
         self.janela = AppGrafico()
         self.janela.show()
 
@@ -77,12 +99,26 @@ class Janela(QtWidgets.QMainWindow):
             if element[4:5] == '#':
                 element_unico = li.grafico_pizza(element, info[2])
                 element_unico.converter_dados_num()
+        global var
+        var = 2
 
         y = np.array(li.lista_dados_num)
         
         plt.pie(y, labels = li.colunas)
         plt.legend(title = li.titulo)
         plt.show()
+
+    def open_grafico_horizontal(self):
+          #adicionar os dados para as listas de dados do gráfico
+        for element in info:
+            if element[4:5] == '#':
+                element_unico = li.grafico_horizontal(element, info[2])
+                element_unico.converter_dados_num()
+            global var
+            var = 3
+            
+        self.janela = AppGrafico()
+        self.janela.show()
           
 
 class TelaInicial(QtWidgets.QMainWindow):

@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>780</width>
+    <height>714</height>
+   </rect>
+  </property>
   <property name="palette">
    <palette>
     <active/>
@@ -555,7 +563,7 @@ background-image: url(:/newPrefix/background.png);
          </rect>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Barras</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton2">
@@ -568,7 +576,7 @@ background-image: url(:/newPrefix/background.png);
          </rect>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Pizza</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton3">
@@ -581,7 +589,7 @@ background-image: url(:/newPrefix/background.png);
          </rect>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Horizontal</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton4">
@@ -594,15 +602,15 @@ background-image: url(:/newPrefix/background.png);
          </rect>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Linhas</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_2">
         <property name="geometry">
          <rect>
-          <x>150</x>
+          <x>120</x>
           <y>30</y>
-          <width>481</width>
+          <width>551</width>
           <height>171</height>
          </rect>
         </property>
@@ -613,7 +621,7 @@ font: italic;
 </string>
         </property>
         <property name="text">
-         <string>Teste Gráfico</string>
+         <string>Tipo de gráfico</string>
         </property>
        </widget>
       </widget>
@@ -624,7 +632,7 @@ font: italic;
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="a.qrc"/>
+  <include location="../img/a.qrc"/>
  </resources>
  <connections/>
 </ui>
