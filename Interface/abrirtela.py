@@ -14,8 +14,7 @@ import logo_rc
 def limpar_dados():
     li.colunas = []
     li.lista_dados_num = []
-    print(colunas)
-
+    print(li.colunas)
 
 class Grafico_horizontal(FigureCanvas):
     def __init__(self, parent):
@@ -32,8 +31,7 @@ class Grafico_horizontal(FigureCanvas):
         self.ax.set(xlabel=li.x, ylabel=li.y,
              title=li.titulo)
 
-        li.colunas = []
-        li.lista_dados_num = []
+        limpar_dados()
 
 class Grafico_barras(FigureCanvas):
     def __init__(self, parent):
@@ -49,8 +47,7 @@ class Grafico_barras(FigureCanvas):
 
         self.ax.set(xlabel=li.x, ylabel=li.y, title=li.titulo)
 
-        li.colunas = []
-        li.lista_dados_num = []
+        limpar_dados()
 
 class Grafico_pizza(FigureCanvas):
     def __init__(self, parent):
@@ -63,8 +60,7 @@ class Grafico_pizza(FigureCanvas):
         
         self.ax.pie(y, labels = li.colunas)
 
-        li.colunas = []
-        li.lista_dados_num = []
+        limpar_dados()
 
 #Define a resolução
 class AppGrafico(QWidget):
