@@ -11,6 +11,11 @@ import logo_rc
 
 #define a tela com as escalas e informações do gráfico
 
+def limpar_dados():
+    li.colunas = []
+    li.lista_dados_num = []
+    print(colunas)
+
 
 class Grafico_horizontal(FigureCanvas):
     def __init__(self, parent):
@@ -27,6 +32,9 @@ class Grafico_horizontal(FigureCanvas):
         self.ax.set(xlabel=li.x, ylabel=li.y,
              title=li.titulo)
 
+        li.colunas = []
+        li.lista_dados_num = []
+
 class Grafico_barras(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
@@ -39,9 +47,10 @@ class Grafico_barras(FigureCanvas):
         
         self.ax.bar(xpoints, ypoints)
 
-        self.ax.set(xlabel=li.x, ylabel=li.y,
-             title=li.titulo)
+        self.ax.set(xlabel=li.x, ylabel=li.y, title=li.titulo)
 
+        li.colunas = []
+        li.lista_dados_num = []
 
 class Grafico_pizza(FigureCanvas):
     def __init__(self, parent):
@@ -53,6 +62,9 @@ class Grafico_pizza(FigureCanvas):
         y = np.array(li.lista_dados_num)
         
         self.ax.pie(y, labels = li.colunas)
+
+        li.colunas = []
+        li.lista_dados_num = []
 
 #Define a resolução
 class AppGrafico(QWidget):
