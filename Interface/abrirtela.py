@@ -37,7 +37,6 @@ class Janela(QtWidgets.QMainWindow):
         super(Janela, self).__init__()
         uic.loadUi('ui/janela.ui', self)
         self.setFixedSize(777, 712)
-        janela = AppGrafico()
         self.pushButton.clicked.connect(self.open_grafico_barras)
           
 
@@ -48,8 +47,10 @@ class Janela(QtWidgets.QMainWindow):
                 element_unico = li.grafico_barras(element, info[2])
                 element_unico.converter_dados_num()
             print(element)
+            
+        self.janela = AppGrafico()
+        self.janela.show()
 
-        janela.show()
           
 
 class TelaInicial(QtWidgets.QMainWindow):
