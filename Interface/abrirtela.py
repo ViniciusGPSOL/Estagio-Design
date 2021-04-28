@@ -59,10 +59,18 @@ class Grafico_barras(FigureCanvas):
 #Dados do gráfico
         xpoints = np.array(li.colunas)
         ypoints = np.array(li.lista_dados_num)
+
+        x = np.arange(len(xpoints))
+        width = 0.2
         
-        self.ax.bar(xpoints, ypoints)
+        self.ax.bar(x - width, ypoints, width = width)
+        self.ax.bar(x, ypoints, width = width)
+        self.ax.bar(x + width, ypoints, width = width)
+  
 
         self.ax.set(xlabel=li.x, ylabel=li.y, title=li.titulo)
+        self.ax.set_xticks(x)
+        self.ax.set_xticklabels(xpoints)
 
         limpar_dados()
 
