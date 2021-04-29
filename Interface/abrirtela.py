@@ -59,14 +59,15 @@ class Grafico_barras(FigureCanvas):
 #Dados do gráfico
         xpoints = np.array(li.colunas)
         ypoints = np.array(li.lista_dados_num)
-
+        
         x = np.arange(len(xpoints))
         width = 0.2
         
-        self.ax.bar(x - width, ypoints, width = width)
-        self.ax.bar(x, ypoints, width = width)
-        self.ax.bar(x + width, ypoints, width = width)
-  
+        for sec in x:
+            parametros = len(ypoints[0])
+            self.ax.bar(x[sec] - width, ypoints[sec][0] , width = width)
+            self.ax.bar(x[sec], ypoints[sec][1], width = width)
+            #self.ax.bar(x[sec] + width, ypoints[sec][0], width = width)
 
         self.ax.set(xlabel=li.x, ylabel=li.y, title=li.titulo)
         self.ax.set_xticks(x)
@@ -115,8 +116,8 @@ class Janela(QtWidgets.QMainWindow):
     def open_grafico_barras(self):
 #adicionar os dados para as listas de dados do gráfico
         for element in info:
-            if element[4:5] == '#':
-                element_unico = li.grafico_barras(element, info[2])
+            if element[4:5] == '!':
+                element_unico = li.grafico_barras(element[:element.index(' ')], element[element.index('#') + 1:].split(','))
                 element_unico.converter_dados_num()
         global var
         var = 1
