@@ -1,0 +1,10 @@
+001titulo do grafico;tipo do grafico;cor do fundo
+002joao;maria;pedro
+003titulo da coluna;0;1000;2000;3000;4000... 20.000
+004titulo da linha;jan;fev;mar...
+005100;300;200|400;550;600|890;600;750
+
+
+
+
+
