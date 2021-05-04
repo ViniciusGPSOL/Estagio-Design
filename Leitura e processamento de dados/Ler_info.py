@@ -7,7 +7,7 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import logo_rc
-
+'''
 class Grafico_barras(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
@@ -22,7 +22,7 @@ class Grafico_barras(FigureCanvas):
 
 
         self.ax.set(xlabel=titulo_linha, titulo_coluna, title=li.titulo)
-
+'''
 
 class AppGrafico(QWidget):
     def __init__(self):
@@ -68,6 +68,7 @@ class TelaInicial(QtWidgets.QMainWindow):
             global cor_fundo
             global parametros
             global titulo_coluna
+            global valores_x
             global titulo_linha
             global lista_valores
             
@@ -91,6 +92,11 @@ class TelaInicial(QtWidgets.QMainWindow):
 #informações quarta linha
             div_linha4 = info[3].split(";")
             titulo_linha = div_linha4[0][3:]
+            valores_x = []
+            for e in div_linha4:
+                if e[3:] != titulo_linha:
+                    valores_x.append(e)
+                    
 #informação quinta linha
             div_linha5 = info[4].split("|")
             lista_valores = []
