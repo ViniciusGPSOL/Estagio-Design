@@ -29,8 +29,11 @@ class Grafico_barras(FigureCanvas):
 
             width = -((numero_parametros * widthb)/2)
 
-            if numero_parametros == 1:
-                self.ax.bar(x[sec], ypoints[sec][0] , width = widthb)
+            if (numero_parametros % 2) == 1:
+                width = width + widthb/2
+                for posicao in range(numero_parametros):
+                    self.ax.bar(x[sec] + width, ypoints[sec][posicao] , width = widthb)
+                    width += widthb
 
             else:
                 for posicao in range(numero_parametros):
@@ -130,11 +133,12 @@ class TelaInicial(QtWidgets.QMainWindow):
                         lista_elementos.append(int(val))
                 t += 1
                 lista_valores.append(lista_elementos)
+
+            self.janela = AppGrafico()
+            self.janela.show()
                 
             self.pushButton.clicked.disconnect(self.open_dialog_box)
             
-            janela = AppGrafico()
-            janela.show()
 
 
 if __name__ == '__main__':
