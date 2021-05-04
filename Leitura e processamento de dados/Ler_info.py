@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import logo_rc
 
+#Grafico de barras
 class Grafico_barras(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
@@ -17,6 +18,8 @@ class Grafico_barras(FigureCanvas):
 #Dados do gráfico
         xpoints = np.array(valores_x)
         ypoints = np.array(lista_valores)
+        print(123)
+
 
         print(xpoints)
         print(ypoints)
@@ -29,11 +32,8 @@ class Grafico_barras(FigureCanvas):
 
             width = -((numero_parametros * widthb)/2)
 
-            if (numero_parametros % 2) == 1:
-                width = width + widthb/2
-                for posicao in range(numero_parametros):
-                    self.ax.bar(x[sec] + width, ypoints[sec][posicao] , width = widthb)
-                    width += widthb
+            if numero_parametros == 1:
+                self.ax.bar(x[sec], ypoints[sec][0] , width = widthb)
 
             else:
                 for posicao in range(numero_parametros):
@@ -45,23 +45,36 @@ class Grafico_barras(FigureCanvas):
         self.ax.set_xticks(x)
         self.ax.set_xticklabels(xpoints)
 
+#Grafico de linhas
+class Grafico_linha(FigureCanvas):
+    def __init__(self, parent):
+        fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
+        super().__init__(fig)
+        self.setParent(parent)
+
+#Dados do gráfico
+        rep = 0
+        while rep != len(lista_valores):
+            xpoints = np.array(valores_x)
+            ypoints = np.array(lista_valores[rep])
+            self.ax.plot(xpoints, ypoints)
+            self.ax.legend(parametros)
+            rep+=1
+        self.ax.grid(True)
+        self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
+        
 
 class AppGrafico(QWidget):
     def __init__(self):
         super().__init__()
         self.resize(1400, 800)
-
         
         if tipo_grafico == 'barras':
             chart = Grafico_barras(self)
-
-        '''
-        elif var == 2:
+        elif tipo_grafico == 'pizza':
             chart = Grafico_pizza(self)
-        elif var == 3:
-            chart = Grafico_horizontal(self)
-        elif var == 4:
-            chart = Grafico_linha(self)'''
+        elif tipo_grafico == 'linhas':
+            chart = Grafico_linha(self)
         
 class TelaInicial(QtWidgets.QMainWindow):
     def __init__(self):
@@ -132,12 +145,11 @@ class TelaInicial(QtWidgets.QMainWindow):
                     else:
                         lista_elementos.append(int(val))
                 t += 1
-                lista_valores.append(lista_elementos)
-
+                lista_valores.append(lista_elementos)      
+            
+            self.pushButton.clicked.disconnect(self.open_dialog_box)
             self.janela = AppGrafico()
             self.janela.show()
-                
-            self.pushButton.clicked.disconnect(self.open_dialog_box)
             
 
 

@@ -1,0 +1,5 @@
+001grafico de linhas;linhas;cor do fundo
+002joao;maria;pedro
+003titulo da coluna;0;1000;2000;3000;4000... 20.000
+004vendas;jan;fev;mar;abril
+005100;300;200;111|400;550;600;100|100;350;500;100
