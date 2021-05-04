@@ -8,6 +8,43 @@ import numpy as np
 import matplotlib.pyplot as plt
 import logo_rc
 
+class Grafico_pizza(FigureCanvas):
+    def __init__(self, parent):
+        fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
+        super().__init__(fig)
+        self.setParent(parent)
+
+#Dados do gráfico
+
+        valores_pizza = []
+        total = 0
+
+        for item in lista_valores:
+            valores_pizza.append(item[0])
+            total += item[0]
+
+        porcentagens = []
+
+        for valor in valores_pizza:
+            porcentagem = (valor*100)/total
+
+            simbolo = '%'
+
+            variavel_porcentagem = str(round(porcentagem, 2))
+            variavel_completa = variavel_porcentagem + '' + simbolo
+            
+            porcentagens.append(variavel_completa)
+
+            
+        
+        ypoints = np.array(valores_pizza)
+        xpoints = np.array(valores_x)
+
+        
+        self.ax.pie(ypoints, labels=porcentagens)
+        self.ax.set(title=titulo_grafico)
+        self.ax.legend(valores_x, loc='best', bbox_to_anchor=(-0.6, 0.25, 0.5, 0.5))
+
 #Grafico de barras
 class Grafico_barras(FigureCanvas):
     def __init__(self, parent):
