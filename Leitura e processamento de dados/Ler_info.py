@@ -7,7 +7,7 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import logo_rc
-'''
+
 class Grafico_barras(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
@@ -15,14 +15,33 @@ class Grafico_barras(FigureCanvas):
         self.setParent(parent)
 
 #Dados do gráfico
-        xpoints = np.array(li.colunas)
-        ypoints = np.array(li.lista_dados_num)
+        xpoints = np.array(valores_x)
+        ypoints = np.array(lista_valores)
+
+        print(xpoints)
+        print(ypoints)
         
-        self.ax.bar(xpoints, ypoints)
+        x = np.arange(len(xpoints))
+        
+        for sec in x:
+            numero_parametros = len(parametros)
+            widthb = 0.8/numero_parametros
+
+            width = -((numero_parametros * widthb)/2)
+
+            if numero_parametros == 1:
+                self.ax.bar(x[sec], ypoints[sec][0] , width = widthb)
+
+            else:
+                for posicao in range(numero_parametros):
+                    self.ax.bar(x[sec] + width, ypoints[sec][posicao] , width = widthb)
+                    width += widthb
 
 
-        self.ax.set(xlabel=titulo_linha, titulo_coluna, title=li.titulo)
-'''
+        self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
+        self.ax.set_xticks(x)
+        self.ax.set_xticklabels(xpoints)
+
 
 class AppGrafico(QWidget):
     def __init__(self):
@@ -31,8 +50,7 @@ class AppGrafico(QWidget):
 
         
         if tipo_grafico == 'barras':
-            print('2721')
-            #chart = Grafico_barras(self)
+            chart = Grafico_barras(self)
 
         '''
         elif var == 2:
@@ -112,6 +130,7 @@ class TelaInicial(QtWidgets.QMainWindow):
                         lista_elementos.append(int(val))
                 t += 1
                 lista_valores.append(lista_elementos)
+                
             self.pushButton.clicked.disconnect(self.open_dialog_box)
             
             janela = AppGrafico()
