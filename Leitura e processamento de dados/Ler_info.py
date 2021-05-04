@@ -7,6 +7,40 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import logo_rc
+
+class Grafico_barras(FigureCanvas):
+    def __init__(self, parent):
+        fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
+        super().__init__(fig)
+        self.setParent(parent)
+
+#Dados do gráfico
+        xpoints = np.array(li.colunas)
+        ypoints = np.array(li.lista_dados_num)
+        
+        self.ax.bar(xpoints, ypoints)
+
+
+        self.ax.set(xlabel=titulo_linha, titulo_coluna, title=li.titulo)
+
+
+class AppGrafico(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.resize(1400, 800)
+
+        
+        if tipo_grafico == 'barras':
+            print('2721')
+            #chart = Grafico_barras(self)
+
+        '''
+        elif var == 2:
+            chart = Grafico_pizza(self)
+        elif var == 3:
+            chart = Grafico_horizontal(self)
+        elif var == 4:
+            chart = Grafico_linha(self)'''
         
 class TelaInicial(QtWidgets.QMainWindow):
     def __init__(self):
@@ -24,6 +58,19 @@ class TelaInicial(QtWidgets.QMainWindow):
             global info
             info = (f.readlines())
 #iformações primeira linha
+            global div_linha1
+            global div_linha2
+            global div_linha3
+            global div_linha4
+            global div_linha5
+            global titulo_grafico
+            global tipo_grafico
+            global cor_fundo
+            global parametros
+            global titulo_coluna
+            global titulo_linha
+            global lista_valores
+            
             div_linha1 = info[0].split(";")
             titulo_grafico = div_linha1[0][3:]
             tipo_grafico = div_linha1[1]
@@ -60,6 +107,9 @@ class TelaInicial(QtWidgets.QMainWindow):
                 t += 1
                 lista_valores.append(lista_elementos)
             self.pushButton.clicked.disconnect(self.open_dialog_box)
+            
+            janela = AppGrafico()
+            janela.show()
 
 
 if __name__ == '__main__':
