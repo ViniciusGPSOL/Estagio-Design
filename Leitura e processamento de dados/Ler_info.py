@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QApplication, QWidget
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 import logo_rc
 
 class Grafico_pizza(FigureCanvas):
@@ -57,18 +58,23 @@ class Grafico_barras(FigureCanvas):
         ypoints = np.array(lista_valores)
 
 
-        print(xpoints)
-        print(ypoints)
+        cores = []  
         
         x = np.arange(len(xpoints))
+        
 
-        cores = ['b','g','r','c','m','y','k']        
+        ys = [i+x+(i*x)**2 for i in range(len(parametros))]
+
+        colors = cm.rainbow(np.linspace(0, 1, len(ys)))
+        for y, c in zip(ys, colors):
+            cores.append(c)
+        
         
         for sec in x:
             numero_parametros = len(lista_valores[sec])
             widthb = 0.8/numero_parametros
 
-            print(numero_parametros)
+
 
 
             width = -((numero_parametros * widthb)/2)
@@ -83,6 +89,7 @@ class Grafico_barras(FigureCanvas):
         self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
         self.ax.set_xticks(x)
         self.ax.set_xticklabels(xpoints)
+        self.ax.legend(parametros, loc='best', bbox_to_anchor=(0.9, 0.55))
 
 #Grafico de linhas
 class Grafico_linha(FigureCanvas):
@@ -187,6 +194,7 @@ class TelaInicial(QtWidgets.QMainWindow):
                 lista_valores.append(lista_elementos)      
             
             self.pushButton.clicked.disconnect(self.open_dialog_box)
+            self.pushButton.clicked.connect(self.open_dialog_box)
             self.janela = AppGrafico()
             self.janela.show()
             

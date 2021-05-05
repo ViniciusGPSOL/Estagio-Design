@@ -1,0 +1,10 @@
+001titulo do grafico;barras;cor do fundo
+002joao;maria;pedro;jose;mateus;jose1;jose2
+003titulo da coluna
+004titulo da linha;jan;fev;mar;abr
+005100;300;200;100;300;400;500|400;550;600;100;300;400;500|890;600;750;100;300;400;500|300;200;100;200;300;400;500
+
+
+
+
+
