@@ -55,7 +55,6 @@ class Grafico_barras(FigureCanvas):
 #Dados do gráfico
         xpoints = np.array(valores_x)
         ypoints = np.array(lista_valores)
-        print(123)
 
 
         print(xpoints)
@@ -66,22 +65,19 @@ class Grafico_barras(FigureCanvas):
         cores = ['b','g','r','c','m','y','k']        
         
         for sec in x:
-            numero_parametros = len(parametros)
+            numero_parametros = len(lista_valores[sec])
             widthb = 0.8/numero_parametros
+
+            print(numero_parametros)
 
 
             width = -((numero_parametros * widthb)/2)
 
 
-            if (numero_parametros % 2) == 1:
-                for posicao in range(numero_parametros):
-                    self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
-                    width += widthb
+            for posicao in range(numero_parametros):
+                self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
+                width += widthb
 
-            elif (numero_parametros % 2) == 0:
-                for posicao in range(numero_parametros):
-                    self.ax.bar(x[sec] + width, ypoints[sec][posicao] , width = widthb, color=cores[posicao])
-                    width += widthb
 
 
         self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
