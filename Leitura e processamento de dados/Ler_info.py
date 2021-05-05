@@ -62,21 +62,25 @@ class Grafico_barras(FigureCanvas):
         print(ypoints)
         
         x = np.arange(len(xpoints))
+
+        cores = ['b','g','r','c','m','y','k']        
         
         for sec in x:
             numero_parametros = len(parametros)
             widthb = 0.8/numero_parametros
 
+
             width = -((numero_parametros * widthb)/2)
+
 
             if (numero_parametros % 2) == 1:
                 for posicao in range(numero_parametros):
-                    self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb)
+                    self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
                     width += widthb
 
-            else:
+            elif (numero_parametros % 2) == 0:
                 for posicao in range(numero_parametros):
-                    self.ax.bar(x[sec] + width, ypoints[sec][posicao] , width = widthb)
+                    self.ax.bar(x[sec] + width, ypoints[sec][posicao] , width = widthb, color=cores[posicao])
                     width += widthb
 
 
