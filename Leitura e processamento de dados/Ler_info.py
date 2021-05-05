@@ -69,8 +69,10 @@ class Grafico_barras(FigureCanvas):
 
             width = -((numero_parametros * widthb)/2)
 
-            if numero_parametros == 1:
-                self.ax.bar(x[sec], ypoints[sec][0] , width = widthb)
+            if (numero_parametros % 2) == 1:
+                for posicao in range(numero_parametros):
+                    self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb)
+                    width += widthb
 
             else:
                 for posicao in range(numero_parametros):
