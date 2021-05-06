@@ -32,7 +32,7 @@ class Grafico_pizza(FigureCanvas):
             simbolo = '%'
 
             variavel_porcentagem = str(round(porcentagem, 2))
-            variavel_completa = variavel_porcentagem + '' + simbolo
+            variavel_completa = str(valor) + '\n' + variavel_porcentagem + '' + simbolo
             
             porcentagens.append(variavel_completa)
 

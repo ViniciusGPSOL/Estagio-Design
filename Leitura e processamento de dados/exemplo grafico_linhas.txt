@@ -1,5 +1,5 @@
-001grafico de linhas;linhas;cor do fundo
-002joao;maria;pedro
-003titulo da coluna;0;1000;2000;3000;4000... 20.000
-004vendas;jan;fev;mar;abril
-005100;300;200;111|400;550;600;100|100;350;500;100
+001Vendas por mes;linhas;cor do fundo
+002Renan;Vinicius;Maria
+003meses;
+004Vendas;jan;fev;mar;abril
+005100;300;200;400|400;550;600;800|100;350;500;300
