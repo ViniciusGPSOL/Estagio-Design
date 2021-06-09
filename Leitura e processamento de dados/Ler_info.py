@@ -74,12 +74,7 @@ class Grafico_barras(FigureCanvas):
         for sec in x:
             numero_parametros = len(lista_valores[sec])
             widthb = 0.8/numero_parametros
-
-
-
-
             width = -((numero_parametros * widthb)/2)
-
 
             for posicao in range(numero_parametros):
                 self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
@@ -165,8 +160,9 @@ class TelaInicial(QtWidgets.QMainWindow):
                     par1 = param[3:]
                     parametros.append(par1)
                 else:
-                    parx = param
+                    parx = param.rstrip('\n')
                     parametros.append(parx)
+            
 #informações terceira linha
             div_linha3 = info[2].split(";")
             titulo_coluna = div_linha3[0][3:]
