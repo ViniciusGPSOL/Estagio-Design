@@ -4,6 +4,7 @@ from PyQt5.QtGui import QIcon
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5.QtWidgets import QApplication, QWidget
 import sys
+import re
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
@@ -187,18 +188,25 @@ class TelaInicial(QtWidgets.QMainWindow):
                 for val in lista_elementos_str:
                     if val[:3] == '005':
                         first = val[3:]
-                        lista_elementos.append(int(first))
+                        if re.search('\\b,\\b', first, re.IGNORECASE):                  
+                            first = first.replace(",", ".")
+                            lista_elementos.append(float(first))
+                        else:
+                            lista_elementos.append(float(first))
                     else:
-                        lista_elementos.append(int(val))
+                        if re.search('\\b,\\b', val, re.IGNORECASE):                  
+                            correcao = val.replace(",", ".")
+                            lista_elementos.append(float(correcao))
+                        else:
+                            lista_elementos.append(float(val))
                 t += 1
-                lista_valores.append(lista_elementos)      
-            
+                lista_valores.append(lista_elementos)
+
             self.pushButton.clicked.disconnect(self.open_dialog_box)
             self.pushButton.clicked.connect(self.open_dialog_box)
             self.janela = AppGrafico()
             self.janela.show()
             
-
 
 if __name__ == '__main__':
      import sys
