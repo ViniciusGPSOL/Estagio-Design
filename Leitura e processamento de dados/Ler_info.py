@@ -80,7 +80,12 @@ class Grafico_barras(FigureCanvas):
                 self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
                 width += widthb
 
+        print(x)
 
+        for g in x:
+            for index, value in enumerate(ypoints[g]):
+                self.ax.text(value, index,
+                         str(value))
 
         self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
         self.ax.set_xticks(x)
@@ -109,6 +114,7 @@ class Grafico_linha(FigureCanvas):
 class AppGrafico(QWidget):
     def __init__(self):
         super().__init__()
+        self.setWindowTitle(titulo_grafico)
         self.resize(1400, 800)
         
         if tipo_grafico == 'barras':
@@ -201,7 +207,7 @@ class TelaInicial(QtWidgets.QMainWindow):
             self.pushButton.clicked.disconnect(self.open_dialog_box)
             self.pushButton.clicked.connect(self.open_dialog_box)
             self.janela = AppGrafico()
-            self.janela.show()
+            self.janela.showMaximized()
             
 
 if __name__ == '__main__':
