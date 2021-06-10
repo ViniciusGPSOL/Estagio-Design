@@ -79,11 +79,8 @@ class Grafico_barras(FigureCanvas):
             for posicao in range(numero_parametros):
                 self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
                 width += widthb
-
-        for g in x:
-            for index, value in enumerate(ypoints[g]):
-                self.ax.text(index, value,
-                         str(value))
+                print(x[sec], ypoints[sec][posicao])
+                self.ax.text(x[sec], ypoints[sec][posicao], str(ypoints[sec][posicao]))
 
         self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
         self.ax.set_xticks(x)
