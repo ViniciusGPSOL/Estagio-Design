@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
-from PyQt5.QtWidgets import QApplication, QInputDialog, QLineEdit, QFileDialog
+from PyQt5.QtWidgets import QApplication, QInputDialog, QLineEdit, QFileDialog, QGridLayout, QSizePolicy, QApplication
 from PyQt5.QtGui import QIcon
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5.QtWidgets import QApplication, QWidget
@@ -12,7 +12,7 @@ import logo_rc
 
 class Grafico_pizza(FigureCanvas):
     def __init__(self, parent):
-        fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
+        fig, self.ax = plt.subplots(figsize=(17, 9), dpi=110)
         super().__init__(fig)
         self.setParent(parent)
 
@@ -50,7 +50,7 @@ class Grafico_pizza(FigureCanvas):
 #Grafico de barras
 class Grafico_barras(FigureCanvas):
     def __init__(self, parent):
-        fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
+        fig, self.ax = plt.subplots(figsize=(17, 9), dpi=110)
         super().__init__(fig)
         self.setParent(parent)
 
@@ -79,20 +79,19 @@ class Grafico_barras(FigureCanvas):
 
             for posicao in range(numero_parametros):
                 self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
-                self.ax.text(x[sec] + width, ypoints[sec][posicao], str(ypoints[sec][posicao]), fontsize= 8)
+                self.ax.text(x[sec] + width, ypoints[sec][posicao], str(ypoints[sec][posicao]), fontsize= 10)
                 width += widthb
 
-                print(width, widthb)
 
         self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
         self.ax.set_xticks(x)
         self.ax.set_xticklabels(xpoints)
-        self.ax.legend(parametros, loc='best', bbox_to_anchor=(0.9, 0.55))
+        self.ax.legend(parametros, loc='best', bbox_to_anchor=(1.1, 0.55))
 
 #Grafico de linhas
 class Grafico_linha(FigureCanvas):
     def __init__(self, parent):
-        fig, self.ax = plt.subplots(figsize=(7, 4), dpi=200)
+        fig, self.ax = plt.subplots(figsize=(17, 9), dpi=110)
         super().__init__(fig)
         self.setParent(parent)
 
@@ -106,13 +105,18 @@ class Grafico_linha(FigureCanvas):
             rep+=1
         self.ax.grid(True)
         self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
+        self.ax.legend(parametros, loc='best', bbox_to_anchor=(1.1, 0.55))
         
 
 class AppGrafico(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle(titulo_grafico)
-        self.resize(1400, 800)
+        self.setMinimumSize(1200, 600)
+        self.setStyleSheet("background-color: white;")
+
+        layoutGrid = QGridLayout()
+        self.setLayout(layoutGrid)
         
         if tipo_grafico == 'barras':
             chart = Grafico_barras(self)
@@ -120,6 +124,9 @@ class AppGrafico(QWidget):
             chart = Grafico_pizza(self)
         elif tipo_grafico == 'linhas':
             chart = Grafico_linha(self)
+
+        chart.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        layoutGrid.addWidget(chart)
         
 class TelaInicial(QtWidgets.QMainWindow):
     def __init__(self):
