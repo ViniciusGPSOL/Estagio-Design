@@ -80,11 +80,9 @@ class Grafico_barras(FigureCanvas):
                 self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
                 width += widthb
 
-        print(x)
-
         for g in x:
             for index, value in enumerate(ypoints[g]):
-                self.ax.text(value, index,
+                self.ax.text(index, value,
                          str(value))
 
         self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
