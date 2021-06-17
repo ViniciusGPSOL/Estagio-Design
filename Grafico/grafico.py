@@ -136,18 +136,20 @@ class TelaInicial(QtWidgets.QMainWindow):
         uic.loadUi('ui/tela_principal.ui', self)
         self.setFixedSize(777, 712)
         self.setWindowTitle('Tela principal')
-        #self.pushButton.clicked.connect(self.open_dialog_box)
         
         self.param = sys.argv[1:]
 
         if self.param:
-        	print(self.param)
         	self.open_dialog_box()
+
+        else:
+        	app = QtWidgets.QApplication([])
+        	error_dialog = QtWidgets.QErrorMessage()
+        	error_dialog.showMessage('Nenhum parâmetro recebido')
+        	app.exec_()
 
 
     def open_dialog_box(self):
-        '''filepath = QFileDialog.getOpenFileName()
-        filename = filepath[0]'''
         with open(str(self.param[0]), "r") as f:
             global info
             info = (f.readlines())
@@ -170,7 +172,7 @@ class TelaInicial(QtWidgets.QMainWindow):
             titulo_grafico = div_linha1[0][3:]
             tipo_grafico = div_linha1[1]
             cor_fundo = div_linha1[2]
-#informações segunda linha
+
             div_linha2 = info[1].split(";")
             parametros = []
             for param in div_linha2:
@@ -181,10 +183,10 @@ class TelaInicial(QtWidgets.QMainWindow):
                     parx = param.rstrip('\n')
                     parametros.append(parx)
             
-#informações terceira linha
+
             div_linha3 = info[2].split(";")
             titulo_coluna = div_linha3[0][3:]
-#informações quarta linha
+
             div_linha4 = info[3].split(";")
             titulo_linha = div_linha4[0][3:]
             valores_x = []
@@ -192,7 +194,7 @@ class TelaInicial(QtWidgets.QMainWindow):
                 if e[3:] != titulo_linha:
                     valores_x.append(e)
                     
-#informação quinta linha
+
             div_linha5 = info[4].split("|")
             lista_valores = []
             t= 0
@@ -216,8 +218,6 @@ class TelaInicial(QtWidgets.QMainWindow):
                 t += 1
                 lista_valores.append(lista_elementos)
 
-            #self.pushButton.clicked.disconnect(self.open_dialog_box)
-            #self.pushButton.clicked.connect(self.open_dialog_box)
             self.close()
             self.janela = AppGrafico()
             self.janela.showMaximized()
