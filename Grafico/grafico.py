@@ -133,18 +133,16 @@ class AppGrafico(QWidget):
 class TelaInicial(QtWidgets.QMainWindow):
     def __init__(self):
         super(TelaInicial, self).__init__()
-        '''uic.loadUi('ui/tela_principal.ui', self)
+        uic.loadUi('ui/tela_principal.ui', self)
         self.setFixedSize(777, 712)
         self.setWindowTitle('Tela principal')
-        self.pushButton.clicked.connect(self.open_dialog_box)'''
-
+        #self.pushButton.clicked.connect(self.open_dialog_box)
+        
         self.param = sys.argv[1:]
 
         if self.param:
         	print(self.param)
         	self.open_dialog_box()
-
-
 
 
     def open_dialog_box(self):
@@ -229,6 +227,6 @@ if __name__ == '__main__':
      import sys
      app = QtWidgets.QApplication(sys.argv) 
      window = TelaInicial()
-     window.show()
+     #window.show()
      sys.exit(app.exec_())
 
