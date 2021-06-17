@@ -8,9 +8,6 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-import logo_rc
-
-
 
 class Grafico_pizza(FigureCanvas):
     def __init__(self, parent):
@@ -36,15 +33,12 @@ class Grafico_pizza(FigureCanvas):
 
             variavel_porcentagem = str(round(porcentagem, 2))
             variavel_completa = str(valor) + '\n' + variavel_porcentagem + '' + simbolo
-            
+
             porcentagens.append(variavel_completa)
 
-            
-        
         ypoints = np.array(valores_pizza)
         xpoints = np.array(valores_x)
 
-        
         self.ax.pie(ypoints, labels=porcentagens)
         self.ax.set(title=titulo_grafico)
         self.ax.legend(valores_x, loc='best', bbox_to_anchor=(-0.6, 0.25, 0.5, 0.5))
@@ -60,30 +54,25 @@ class Grafico_barras(FigureCanvas):
         xpoints = np.array(valores_x)
         ypoints = np.array(lista_valores)
 
-
         cores = []  
         
         x = np.arange(len(xpoints))
         
-
         ys = [i+x+(i*x)**2 for i in range(len(parametros))]
 
         colors = cm.rainbow(np.linspace(0, 1, len(ys)))
         for y, c in zip(ys, colors):
             cores.append(c)
         
-        
         for sec in x:
             numero_parametros = len(lista_valores[sec])
             widthb = 0.8/numero_parametros
             width = -((numero_parametros * widthb)/2)
 
-
             for posicao in range(numero_parametros):
                 self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
                 self.ax.text(x[sec] + width, ypoints[sec][posicao], str(ypoints[sec][posicao]), fontsize= 10)
                 width += widthb
-
 
         self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
         self.ax.set_xticks(x)
@@ -132,11 +121,7 @@ class AppGrafico(QWidget):
         
 class TelaInicial(QtWidgets.QMainWindow):
     def __init__(self):
-        super(TelaInicial, self).__init__()
-        uic.loadUi('ui/tela_principal.ui', self)
-        self.setFixedSize(777, 712)
-        self.setWindowTitle('Tela principal')
-        
+        super(TelaInicial, self).__init__()    
         self.param = sys.argv[1:]
 
         if self.param:
@@ -154,6 +139,7 @@ class TelaInicial(QtWidgets.QMainWindow):
             global info
             info = (f.readlines())
 #iformações primeira linha
+            global erro
             global div_linha1
             global div_linha2
             global div_linha3
@@ -172,7 +158,7 @@ class TelaInicial(QtWidgets.QMainWindow):
             titulo_grafico = div_linha1[0][3:]
             tipo_grafico = div_linha1[1]
             cor_fundo = div_linha1[2]
-
+            
             div_linha2 = info[1].split(";")
             parametros = []
             for param in div_linha2:
@@ -182,7 +168,6 @@ class TelaInicial(QtWidgets.QMainWindow):
                 else:
                     parx = param.rstrip('\n')
                     parametros.append(parx)
-            
 
             div_linha3 = info[2].split(";")
             titulo_coluna = div_linha3[0][3:]
@@ -193,7 +178,6 @@ class TelaInicial(QtWidgets.QMainWindow):
             for e in div_linha4:
                 if e[3:] != titulo_linha:
                     valores_x.append(e)
-                    
 
             div_linha5 = info[4].split("|")
             lista_valores = []
@@ -221,12 +205,10 @@ class TelaInicial(QtWidgets.QMainWindow):
             self.close()
             self.janela = AppGrafico()
             self.janela.showMaximized()
-            
 
 if __name__ == '__main__':
      import sys
      app = QtWidgets.QApplication(sys.argv) 
      window = TelaInicial()
-     #window.show()
      sys.exit(app.exec_())
 
