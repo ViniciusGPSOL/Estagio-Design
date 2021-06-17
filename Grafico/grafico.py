@@ -11,6 +11,7 @@ import matplotlib.cm as cm
 import logo_rc
 
 
+
 class Grafico_pizza(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(17, 9), dpi=110)
@@ -132,16 +133,24 @@ class AppGrafico(QWidget):
 class TelaInicial(QtWidgets.QMainWindow):
     def __init__(self):
         super(TelaInicial, self).__init__()
-        uic.loadUi('ui/tela_principal.ui', self)
+        '''uic.loadUi('ui/tela_principal.ui', self)
         self.setFixedSize(777, 712)
         self.setWindowTitle('Tela principal')
-        self.pushButton.clicked.connect(self.open_dialog_box)
-          
+        self.pushButton.clicked.connect(self.open_dialog_box)'''
+
+        self.param = sys.argv[1:]
+
+        if self.param:
+        	print(self.param)
+        	self.open_dialog_box()
+
+
+
 
     def open_dialog_box(self):
-        filepath = QFileDialog.getOpenFileName()
-        filename = filepath[0]
-        with open(filename, "r") as f:
+        '''filepath = QFileDialog.getOpenFileName()
+        filename = filepath[0]'''
+        with open(str(self.param[0]), "r") as f:
             global info
             info = (f.readlines())
 #iformações primeira linha
@@ -209,8 +218,9 @@ class TelaInicial(QtWidgets.QMainWindow):
                 t += 1
                 lista_valores.append(lista_elementos)
 
-            self.pushButton.clicked.disconnect(self.open_dialog_box)
-            self.pushButton.clicked.connect(self.open_dialog_box)
+            #self.pushButton.clicked.disconnect(self.open_dialog_box)
+            #self.pushButton.clicked.connect(self.open_dialog_box)
+            self.close()
             self.janela = AppGrafico()
             self.janela.showMaximized()
             

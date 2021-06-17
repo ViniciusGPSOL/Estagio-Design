@@ -1,0 +1,5 @@
+001Vendas por mes;linhas;cor do fundo
+002Renan;Vinicius;Maria
+003meses;
+004Vendas;jan;fev;mar;abril
+005100;300;200;400|400;550;600;800|100;350;500;300
