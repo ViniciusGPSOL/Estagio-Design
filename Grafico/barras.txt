@@ -1,7 +1,7 @@
-001Salario/mes;barras;cor
+001Salario/mes;barras;
 002Vinicius;Renan;Maria
-003Meses
-004Salario;Jan;Fev;Mar
+003Salario
+004Meses;Jan;Fev;Mar
 005100,30;300;200,5|400;550,382;600|890;600;750,439
 
 

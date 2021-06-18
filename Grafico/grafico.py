@@ -9,6 +9,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
+
+
 class Grafico_pizza(FigureCanvas):
     def __init__(self, parent):
         fig, self.ax = plt.subplots(figsize=(17, 9), dpi=110)
@@ -33,12 +35,15 @@ class Grafico_pizza(FigureCanvas):
 
             variavel_porcentagem = str(round(porcentagem, 2))
             variavel_completa = str(valor) + '\n' + variavel_porcentagem + '' + simbolo
-
+            
             porcentagens.append(variavel_completa)
 
+            
+        
         ypoints = np.array(valores_pizza)
         xpoints = np.array(valores_x)
 
+        
         self.ax.pie(ypoints, labels=porcentagens)
         self.ax.set(title=titulo_grafico)
         self.ax.legend(valores_x, loc='best', bbox_to_anchor=(-0.6, 0.25, 0.5, 0.5))
@@ -54,27 +59,32 @@ class Grafico_barras(FigureCanvas):
         xpoints = np.array(valores_x)
         ypoints = np.array(lista_valores)
 
+
         cores = []  
         
         x = np.arange(len(xpoints))
         
+
         ys = [i+x+(i*x)**2 for i in range(len(parametros))]
 
         colors = cm.rainbow(np.linspace(0, 1, len(ys)))
         for y, c in zip(ys, colors):
             cores.append(c)
         
+        
         for sec in x:
             numero_parametros = len(lista_valores[sec])
             widthb = 0.8/numero_parametros
             width = -((numero_parametros * widthb)/2)
+
 
             for posicao in range(numero_parametros):
                 self.ax.bar(x[sec] + width + (widthb/2), ypoints[sec][posicao] , width = widthb, color=cores[posicao])
                 self.ax.text(x[sec] + width, ypoints[sec][posicao], str(ypoints[sec][posicao]), fontsize= 10)
                 width += widthb
 
-        self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
+
+        self.ax.set(ylabel=titulo_coluna, xlabel=titulo_linha, title=titulo_grafico)
         self.ax.set_xticks(x)
         self.ax.set_xticklabels(xpoints)
         self.ax.legend(parametros, loc='best', bbox_to_anchor=(1.1, 0.55))
@@ -95,7 +105,7 @@ class Grafico_linha(FigureCanvas):
             self.ax.legend(parametros)
             rep+=1
         self.ax.grid(True)
-        self.ax.set(xlabel=titulo_coluna, ylabel=titulo_linha, title=titulo_grafico)
+        self.ax.set(ylabel=titulo_coluna, xlabel=titulo_linha, title=titulo_grafico)
         self.ax.legend(parametros, loc='best', bbox_to_anchor=(1.1, 0.55))
         
 
@@ -121,7 +131,8 @@ class AppGrafico(QWidget):
         
 class TelaInicial(QtWidgets.QMainWindow):
     def __init__(self):
-        super(TelaInicial, self).__init__()    
+        super(TelaInicial, self).__init__()
+        
         self.param = sys.argv[1:]
 
         if self.param:
@@ -139,7 +150,6 @@ class TelaInicial(QtWidgets.QMainWindow):
             global info
             info = (f.readlines())
 #iformações primeira linha
-            global erro
             global div_linha1
             global div_linha2
             global div_linha3
@@ -147,7 +157,7 @@ class TelaInicial(QtWidgets.QMainWindow):
             global div_linha5
             global titulo_grafico
             global tipo_grafico
-            global cor_fundo
+            #global cor_fundo
             global parametros
             global titulo_coluna
             global valores_x
@@ -157,8 +167,8 @@ class TelaInicial(QtWidgets.QMainWindow):
             div_linha1 = info[0].split(";")
             titulo_grafico = div_linha1[0][3:]
             tipo_grafico = div_linha1[1]
-            cor_fundo = div_linha1[2]
-            
+            #cor_fundo = div_linha1[2]
+
             div_linha2 = info[1].split(";")
             parametros = []
             for param in div_linha2:
@@ -168,6 +178,7 @@ class TelaInicial(QtWidgets.QMainWindow):
                 else:
                     parx = param.rstrip('\n')
                     parametros.append(parx)
+            
 
             div_linha3 = info[2].split(";")
             titulo_coluna = div_linha3[0][3:]
@@ -178,6 +189,7 @@ class TelaInicial(QtWidgets.QMainWindow):
             for e in div_linha4:
                 if e[3:] != titulo_linha:
                     valores_x.append(e)
+                    
 
             div_linha5 = info[4].split("|")
             lista_valores = []
@@ -205,10 +217,12 @@ class TelaInicial(QtWidgets.QMainWindow):
             self.close()
             self.janela = AppGrafico()
             self.janela.showMaximized()
+            
 
 if __name__ == '__main__':
      import sys
      app = QtWidgets.QApplication(sys.argv) 
      window = TelaInicial()
+     #window.show()
      sys.exit(app.exec_())
 
