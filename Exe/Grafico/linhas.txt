@@ -1,0 +1,5 @@
+001Vendas por mes;linhas;
+002Renan;Vinicius;Maria
+003vendas;
+004meses;jan;fev;mar;abril
+005100;300;200;400|400;550;600;800|100;350;500;300

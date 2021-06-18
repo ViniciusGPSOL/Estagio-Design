@@ -136,12 +136,26 @@ class TelaInicial(QtWidgets.QMainWindow):
         self.param = sys.argv[1:]
 
         if self.param:
-        	self.open_dialog_box()
+        	try:
+        		self.open_dialog_box()
+        	except Exception as ex:
+        		template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+        		message = template.format(type(ex).__name__, ex.args)
+        		print(message)
+        		if 'No such file or directory' in message:
+        			erro = 'Nenhum arquivo com esse nome encontrado'
+        		else:
+        			erro = 'Erro no preenchimento de dados'
+        		app = QtWidgets.QApplication([])
+        		error_dialog = QtWidgets.QErrorMessage()
+        		error_dialog.showMessage(erro + ' Erro:' + message)
+        		app.exec_()
+
 
         else:
         	app = QtWidgets.QApplication([])
         	error_dialog = QtWidgets.QErrorMessage()
-        	error_dialog.showMessage('Nenhum parâmetro recebido')
+        	error_dialog.showMessage('Nenhum arquivo recebido como parâmetro')
         	app.exec_()
 
 
